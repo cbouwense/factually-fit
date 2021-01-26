@@ -1,12 +1,24 @@
-# Factually Fit
+# factually-fit-vue
 
-Fitness web app where I host articles I can easily send to my friends when they ask me the same questions over and over again.
+## Project setup
+```
+npm install
+```
 
-## Tech Stack
-- Vue.js
-- node.js
-- GraphQL
-- GCP
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-## UI/UX Design
-Donato Salisbury
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
