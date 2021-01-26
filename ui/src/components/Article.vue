@@ -1,40 +1,26 @@
 <template>
   <div class="article">
-    <h1 class="heading-element">{{ title }}</h1>
-    <h3 class="heading-element">{{ subtitle }}</h3>
-    <p class="date heading-element">Posted on {{ date }}</p>
+    <h1 class="heading-element">{{ article.title }}</h1>
+    <h3 class="heading-element">{{ article.subtitle }}</h3>
+    <p class="date heading-element">Posted on {{ article.date }}</p>
     <div class="heading-element splash">
       <div class="gist">
         <h2>THE GIST</h2>
         <section>
-          <p>{{ gist }}</p>
+          <p>{{ article.gist }}</p>
         </section>
       </div>
       <div class="img-container">
-        <img :src=imgUrl />
+        <img :src=article.imgUrl />
       </div>
     </div>
     <h2>THE LONG VERSION</h2>
-    <section>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </section>
-    <section class="dots">
-      <div class="dot" />
-      <div class="dot" />
-      <div class="dot" />
-    </section>
-    <section>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </section>
-    <section class="dots">
-      <div class="dot" />
-      <div class="dot" />
-      <div class="dot" />
-    </section>
-    <section>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <section v-for="(p, i) in bodyParagraphs" :key="i">
+      <p>{{ p }}</p>
+      <Dots v-if="i < bodyParagraphs.length-1" />
     </section>
     <h2>CITATIONS</h2>
+    <!--
     <section>
       <ol start="1">
         <section><li>1. <a href="example.com">Carbohydrates and You</a></li></section>
@@ -42,31 +28,47 @@
         <section><li>3. <a href="example.com">The Bitter Truth About Sugar</a></li></section>
       </ol>
     </section>
+    -->
   </div>
 </template>
 
 <script>
+import Dots from "./Dots";
+
 export default {
   name: "Article",
+  components: {
+    Dots
+  },
   props: {
-    id: String // TODO: is there like, a nice datatype for this or something?
+    name: String // TODO: does this even make sense? maybe this should come from the route
   },
   data() {
     return {
-      date: undefined,
-      gist: undefined,
-      imgUrl: undefined,
-      subtitle: undefined,
-      title: undefined,
+      article: { }
     }
   },
-  mounted() {
-    // TODO: actually fetch these
-    this.date = new Date().toDateString();
-    this.gist = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    this,imgUrl = "https://i.imgur.com/sp66nuO.png";
-    this.subtitle = "The Magic Macronutrient";
-    this.title = "What Even is a Carbohydrate?";
+  async created() {
+    try {
+      // TODO: make this a real URI
+      const res = (await (await fetch("http://localhost:3001/what-is-carbohydrate")).json()).article;
+      this.article = {
+        body: res.body,
+        citations: res.citations,
+        date: res.metadata.date,
+        gist: res.gist,
+        imgUrl: res.metadata.imgUrl,
+        subtitle: res.metadata.subtitle,
+        title: res.metadata.title
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
+  computed: {
+    bodyParagraphs: function() {
+      return this.article.body?.split("\\n");
+    }
   }
 }
 </script>
@@ -88,20 +90,6 @@ export default {
   font-size: 16px;
 }
 
-.dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: gray;
-  margin: 0 20px;
-}
-
-.dots {
-  display: flex;
-  justify-content: center;
-  margin: 60px 0;
-}
-
 .gist {
   margin: 50px 0;
   width: 60%;
@@ -116,8 +104,9 @@ export default {
 }
 
 .splash img {
-  width: 100%;
-  height: 100%;
+  object-fit: scale-down;
+  /* width: 100%; */
+  /* height: 100%; */
 }
 
 .splash .img-container { 

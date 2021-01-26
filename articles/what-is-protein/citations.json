@@ -1,0 +1,38 @@
+[
+  {
+    "ref": 1,
+    "link": "https://example.com",
+    "title": "Protein is a Macronutrient Paper",
+    "author": "Hugh Mungus"
+  },
+  {
+    "ref": 2,
+    "link": "https://example.com",
+    "title": "Protein is Amino Acids",
+    "author": "Chig Bungus"
+  },
+  {
+    "ref": 3,
+    "link": "https://example.com",
+    "title": "Protein Article",
+    "author": "Gil Galad"
+  },
+  {
+    "ref": 4,
+    "link": "https://example.com",
+    "title": "Insulin Levels as a Function of Carbohydrate Consumption",
+    "author": "Bilbo Baggins"
+  },
+  {
+    "ref": 5,
+    "link": "https://example.com",
+    "title": "High Fiber Carbohydrate Sources Health Benefits",
+    "author": "Samwise Gamgee"
+  },
+  {
+    "ref": 6,
+    "link": "https://example.com",
+    "title": "Protein Article",
+    "author": "Gil Galad"
+  }
+]
