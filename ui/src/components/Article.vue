@@ -20,24 +20,18 @@
       <Dots v-if="i < bodyParagraphs.length-1" />
     </section>
     <h2>CITATIONS</h2>
-    <!--
-    <section>
-      <ol start="1">
-        <section><li>1. <a href="example.com">Carbohydrates and You</a></li></section>
-        <section><li>2. <a href="example.com">Schmoopy and the Gang Discuss Macros</a></li></section>
-        <section><li>3. <a href="example.com">The Bitter Truth About Sugar</a></li></section>
-      </ol>
-    </section>
-    -->
+    <Citations v-if="article.citations !== undefined" :citations=article.citations />
   </div>
 </template>
 
 <script>
+import Citations from "./Citations";
 import Dots from "./Dots";
 
 export default {
   name: "Article",
   components: {
+    Citations,
     Dots
   },
   props: {
