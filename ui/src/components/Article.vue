@@ -11,7 +11,7 @@
         </section>
       </div>
       <div class="img-container">
-        <img :src=imageUrl />
+        <img :src=imgUrl />
       </div>
     </div>
     <h2>THE LONG VERSION</h2>
@@ -48,15 +48,25 @@
 <script>
 export default {
   name: "Article",
+  props: {
+    id: String // TODO: is there like, a nice datatype for this or something?
+  },
   data() {
     return {
-      // TODO: fetch this on mount (pre mount?)
-      date: new Date().toDateString(),
-      gist: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      imageUrl: "https://i.imgur.com/sp66nuO.png",
-      subtitle: "Joe Brown Revealed",
-      title: "What Even is a Carbohydrate?",
+      date: undefined,
+      gist: undefined,
+      imgUrl: undefined,
+      subtitle: undefined,
+      title: undefined,
     }
+  },
+  mounted() {
+    // TODO: actually fetch these
+    this.date = new Date().toDateString();
+    this.gist = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    this,imgUrl = "https://i.imgur.com/sp66nuO.png";
+    this.subtitle = "The Magic Macronutrient";
+    this.title = "What Even is a Carbohydrate?";
   }
 }
 </script>

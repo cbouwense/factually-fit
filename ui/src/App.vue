@@ -1,17 +1,17 @@
 <template>
   <div id="page">
     <img id="logo" src="https://i.imgur.com/daGy27V.png" />
-    <Article />
+    <ArticleList />
   </div>
 </template>
 
 <script>
-import Article from './components/Article.vue'
+import ArticleList from './components/ArticleList.vue'
 
 export default {
   name: 'App',
   components: {
-    Article
+    ArticleList
   }
 }
 </script>
