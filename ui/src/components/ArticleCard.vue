@@ -1,14 +1,15 @@
 <template>
-  <div class="card">
+  <a :href=id>
     <h1>{{ title }}</h1>
     <h2>{{ subtitle }}</h2>
-  </div>
+  </a>
 </template>
 
 <script>
 export default {
   name: "ArticleCard",
   props: {
+    id : String,
     title: String,
     subtitle: String,
   }
@@ -22,7 +23,7 @@ export default {
   justify-content: space-around;
 }
 
-.card {
+a {
   min-height: 100px;
   height: 100%;
   border-radius: 5px;
@@ -32,6 +33,7 @@ export default {
   background-image: linear-gradient(to bottom right, orange, purple);
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 }
 
 h1 {

@@ -2,7 +2,8 @@
   <ul class="article-list">
     <ArticleCard 
       v-for="a in articles" 
-      :key="a.title" 
+      :key=a.name
+      :id=a.id
       :title=a.title
       :subtitle=a.subtitle
     />
@@ -26,8 +27,9 @@ export default {
     try {
       this.articles = (await (await fetch("http://localhost:3001/")).json())
         .map(a => ({
-          subtitle: a.subtitle,
-          title: a.title
+          id: a.id,
+          subtitle: a.data.subtitle,
+          title: a.data.title
         }));
     } catch (err) {
       console.error(err);
@@ -35,7 +37,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

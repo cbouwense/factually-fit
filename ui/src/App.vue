@@ -1,18 +1,18 @@
 <template>
   <div id="page">
-    <img id="logo" src="https://i.imgur.com/daGy27V.png" />
-    <Article />
+    <a href="/"><img id="logo" src="https://i.imgur.com/daGy27V.png" /></a>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Article from './components/Article.vue'
+// import Article from './views/Article.vue'
 // import ArticleList from './components/ArticleList.vue'
 
 export default {
   name: 'App',
   components: {
-    Article
+    // Article
     //ArticleList
   }
 }

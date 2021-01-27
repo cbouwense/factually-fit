@@ -25,8 +25,11 @@
 </template>
 
 <script>
-import Citations from "./Citations";
-import Dots from "./Dots";
+// import { computed } from "vue";
+import { useRoute } from "vue-router";
+
+import Citations from "../components/Citations";
+import Dots from "../components/Dots";
 
 const addCitationNums = (text, citations) => {
   let tags = [];
@@ -59,9 +62,9 @@ export default {
     }
   },
   async created() {
+    const route = useRoute();
     try {
-      // TODO: make this a real URI
-      const res = (await (await fetch(`http://localhost:3001/what-is-carbohydrate`)).json()).article;
+      const res = (await (await fetch(`http://localhost:3001/${route.params.articleId}`)).json()).article;
       this.article = {
         body: res.body,
         citations: res.citations,
