@@ -7,7 +7,7 @@
       <div class="gist">
         <h2>THE GIST</h2>
         <section>
-          <p>{{ article.gist }}</p>
+          <span v-for="(g, i) in citedGist" :key="i"><span v-html="g"></span></span>
         </section>
       </div>
       <div class="img-container">
@@ -15,9 +15,9 @@
       </div>
     </div>
     <h2>THE LONG VERSION</h2>
-    <section v-for="(p, i) in bodyParagraphs" :key="i">
-      <p>{{ p }}</p>
-      <Dots v-if="i < bodyParagraphs.length-1" />
+    <section v-for="(p, i) in citedBody" :key="i">
+      {{ p }}
+      <Dots v-if="i < citedBody.length-1" />
     </section>
     <h2>CITATIONS</h2>
     <Citations v-if="article.citations !== undefined" :citations=article.citations />
@@ -27,6 +27,22 @@
 <script>
 import Citations from "./Citations";
 import Dots from "./Dots";
+
+const addCitationNums = (text, citations) => {
+  let tags = [];
+  if (citations && text) {
+    citations.forEach(c => {
+      try{
+        const tokens = text.split(`{${c.ref}}`);
+        tags.push(`<p>${tokens[0]}</p><sup>${c.ref}</sup>`);
+        text = tokens[1];
+      } catch (_) {
+        return tags.push(`<p>${text}</p>`);
+      }
+    });
+  }
+  return tags;
+}
 
 export default {
   name: "Article",
@@ -45,7 +61,7 @@ export default {
   async created() {
     try {
       // TODO: make this a real URI
-      const res = (await (await fetch("http://localhost:3001/what-is-carbohydrate")).json()).article;
+      const res = (await (await fetch(`http://localhost:3001/what-is-carbohydrate`)).json()).article;
       this.article = {
         body: res.body,
         citations: res.citations,
@@ -60,8 +76,11 @@ export default {
     }
   },
   computed: {
-    bodyParagraphs: function() {
-      return this.article.body?.split("\\n");
+    citedBody: function() {
+      return this.article.body?.split("\\n").map(p => addCitationNums(p, this.article.citations));
+    },
+    citedGist: function() {
+      return addCitationNums(this.article.gist, this.article.citations);
     }
   }
 }
@@ -125,6 +144,11 @@ h3 {
 
 section {
   margin: 30px 0;
+}
+
+sup {
+  vertical-align: super;
+  font-size: 6px;
 }
 
 </style>
