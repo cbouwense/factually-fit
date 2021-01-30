@@ -1,10 +1,7 @@
 <template>
   <div>
-    <div v-if="loading" class="loading ">
-      <img src="https://i.imgur.com/sp66nuO.png" />
-      <h1>Loading :)</h1>
-    </div>
-    <div v-if="!loading" class="article">
+    <Loading :loading="store.state.loading" />
+    <div v-if="!store.state.loading" class="article">
       <h1 class="heading-element">{{ article.title }}</h1>
       <h3 class="heading-element">{{ article.subtitle }}</h3>
       <p class="date heading-element">Posted on {{ article.date }}</p>
@@ -26,7 +23,12 @@
       </div>
       <h2>THE LONG VERSION</h2>
       <section v-for="(p, i) in citedBody" :key="i">
-        <p>{{ p.text }}<sup>{{ p.ref }}</sup></p>
+        <p>
+          {{ p.text }}
+          <a :href="`citation-${p.ref}`">
+            <sup>{{ p.ref }}</sup>
+          </a>
+        </p>
         <Dots v-if="i < citedBody.length-1" />
       </section>
       <h2>CITATIONS</h2>
@@ -38,8 +40,11 @@
 <script>
 import { useRoute } from "vue-router";
 
+import store from "../store";
+
 import Citations from "../components/Citations";
 import Dots from "../components/Dots";
+import Loading from "../components/Loading";
 
 const addCitationNums = (text, citations) => {
   let tags = [];
@@ -63,22 +68,20 @@ export default {
   name: "Article",
   components: {
     Citations,
-    Dots
-  },
-  props: {
-    name: String // TODO: does this even make sense? maybe this should come from the route
+    Dots,
+    Loading,
   },
   data() {
     return {
       article: { },
-      loading: true,
+      store: store,
     }
   },
   async created() {
-    const route = useRoute();
     try {
-      const res = (await (await fetch(`http://localhost:3001/${route.params.articleId}`)).json()).article;
-      this.loading = false;
+      this.store.setLoading(true);
+      const res = (await (await fetch(`http://localhost:3001/${useRoute().params.articleId}`)).json()).article;
+      this.store.setLoading(false);
       this.article = {
         body: res.body,
         citations: res.citations,
@@ -129,17 +132,6 @@ export default {
   margin: 5px 0;
 }
 
-.loading {
-  text-align: center
-}
-
-.loading img {
-  animation: rotation 1s infinite linear;
-  border-radius: 50%;
-  width: 50%;
-  height: 50%;
-}
-
 .splash {
   display: flex
 }
@@ -175,15 +167,6 @@ section {
 sup {
   vertical-align: super;
   font-size: 16px;
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
 }
 
 </style>

@@ -6,15 +6,8 @@
 </template>
 
 <script>
-// import Article from './views/Article.vue'
-// import ArticleList from './components/ArticleList.vue'
-
 export default {
   name: 'App',
-  components: {
-    // Article
-    //ArticleList
-  }
 }
 </script>
 

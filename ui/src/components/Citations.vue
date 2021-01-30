@@ -2,7 +2,7 @@
   <section>
     <ol>
       <li v-for="c in citations" :key="c.ref">
-        <p>{{ c.ref }}. </p>
+        <p :id="`citation-${c.ref}`">{{ c.ref }}. </p>
         <a :href=c.link target="_blank">{{ c.author }}: {{ c.title }}</a>
       </li>
     </ol>
