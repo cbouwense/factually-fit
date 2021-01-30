@@ -7,7 +7,12 @@
       <div class="gist">
         <h2>THE GIST</h2>
         <section>
-          <span v-for="(g, i) in citedGist" :key="i"><span v-html="g"></span></span>
+          <p>
+            <span v-for="(n, i) in citedGist" :key="i"
+            >
+              {{ n.text }}<sup>{{ n.ref }}</sup>
+            </span>
+          </p>
         </section>
       </div>
       <div class="img-container">
@@ -16,7 +21,7 @@
     </div>
     <h2>THE LONG VERSION</h2>
     <section v-for="(p, i) in citedBody" :key="i">
-      {{ p }}
+      <p>{{ p.text }}<sup>{{ p.ref }}</sup></p>
       <Dots v-if="i < citedBody.length-1" />
     </section>
     <h2>CITATIONS</h2>
@@ -25,7 +30,6 @@
 </template>
 
 <script>
-// import { computed } from "vue";
 import { useRoute } from "vue-router";
 
 import Citations from "../components/Citations";
@@ -35,13 +39,15 @@ const addCitationNums = (text, citations) => {
   let tags = [];
   if (citations && text) {
     citations.forEach(c => {
-      try{
-        const tokens = text.split(`{${c.ref}}`);
-        tags.push(`<p>${tokens[0]}</p><sup>${c.ref}</sup>`);
-        text = tokens[1];
-      } catch (_) {
-        return tags.push(`<p>${text}</p>`);
-      }
+      const tokens = text.split(`{${c.ref}}`);
+        tags.push({
+          text: tokens[0],
+          /* eslint-disable no-extra-boolean-cast */
+          ref: !!tokens[0] ? c.ref : `, ${c.ref}`
+        });
+        if (tokens[1]) {
+          text = tokens[1];
+        }
     });
   }
   return tags;
@@ -80,7 +86,7 @@ export default {
   },
   computed: {
     citedBody: function() {
-      return this.article.body?.split("\\n").map(p => addCitationNums(p, this.article.citations));
+      return addCitationNums(this.article.body, this.article.citations);
     },
     citedGist: function() {
       return addCitationNums(this.article.gist, this.article.citations);
@@ -121,8 +127,6 @@ export default {
 
 .splash img {
   object-fit: scale-down;
-  /* width: 100%; */
-  /* height: 100%; */
 }
 
 .splash .img-container { 
@@ -151,7 +155,7 @@ section {
 
 sup {
   vertical-align: super;
-  font-size: 6px;
+  font-size: 16px;
 }
 
 </style>
