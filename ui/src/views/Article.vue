@@ -1,31 +1,37 @@
 <template>
-  <div class="article">
-    <h1 class="heading-element">{{ article.title }}</h1>
-    <h3 class="heading-element">{{ article.subtitle }}</h3>
-    <p class="date heading-element">Posted on {{ article.date }}</p>
-    <div class="heading-element splash">
-      <div class="gist">
-        <h2>THE GIST</h2>
-        <section>
-          <p>
-            <span v-for="(n, i) in citedGist" :key="i"
-            >
-              {{ n.text }}<sup>{{ n.ref }}</sup>
-            </span>
-          </p>
-        </section>
-      </div>
-      <div class="img-container">
-        <img :src=article.imgUrl />
-      </div>
+  <div>
+    <div v-if="loading" class="loading ">
+      <img src="https://i.imgur.com/sp66nuO.png" />
+      <h1>Loading :)</h1>
     </div>
-    <h2>THE LONG VERSION</h2>
-    <section v-for="(p, i) in citedBody" :key="i">
-      <p>{{ p.text }}<sup>{{ p.ref }}</sup></p>
-      <Dots v-if="i < citedBody.length-1" />
-    </section>
-    <h2>CITATIONS</h2>
-    <Citations v-if="article.citations !== undefined" :citations=article.citations />
+    <div v-if="!loading" class="article">
+      <h1 class="heading-element">{{ article.title }}</h1>
+      <h3 class="heading-element">{{ article.subtitle }}</h3>
+      <p class="date heading-element">Posted on {{ article.date }}</p>
+      <div class="heading-element splash">
+        <div class="gist">
+          <h2>THE GIST</h2>
+          <section>
+            <p>
+              <span v-for="(n, i) in citedGist" :key="i"
+              >
+                {{ n.text }}<sup>{{ n.ref }}</sup>
+              </span>
+            </p>
+          </section>
+        </div>
+        <div class="img-container">
+          <img :src=article.imgUrl />
+        </div>
+      </div>
+      <h2>THE LONG VERSION</h2>
+      <section v-for="(p, i) in citedBody" :key="i">
+        <p>{{ p.text }}<sup>{{ p.ref }}</sup></p>
+        <Dots v-if="i < citedBody.length-1" />
+      </section>
+      <h2>CITATIONS</h2>
+      <Citations v-if="article.citations !== undefined" :citations=article.citations />
+    </div>
   </div>
 </template>
 
@@ -64,13 +70,15 @@ export default {
   },
   data() {
     return {
-      article: { }
+      article: { },
+      loading: true,
     }
   },
   async created() {
     const route = useRoute();
     try {
       const res = (await (await fetch(`http://localhost:3001/${route.params.articleId}`)).json()).article;
+      this.loading = false;
       this.article = {
         body: res.body,
         citations: res.citations,
@@ -121,6 +129,17 @@ export default {
   margin: 5px 0;
 }
 
+.loading {
+  text-align: center
+}
+
+.loading img {
+  animation: rotation 1s infinite linear;
+  border-radius: 50%;
+  width: 50%;
+  height: 50%;
+}
+
 .splash {
   display: flex
 }
@@ -156,6 +175,15 @@ section {
 sup {
   vertical-align: super;
   font-size: 16px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
 
 </style>
