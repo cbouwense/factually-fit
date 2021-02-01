@@ -49,17 +49,43 @@ export default {
 </script>
 
 <style scoped>
-
-/* Mobile */
+/* Mobile Vertical */
 li {
-  height: 33%;
-  width: 33%;
+  margin: 5vh 0;
+}
+
+/* Mobile Horizontal */
+@media screen and (min-width: 640px) {
+  li {
+    margin: 10vh 0;
+  }
+
+  ul {
+    margin: 0 15vw;
+  } 
 }
 
 /* Tablet */
+@media screen and (min-width: 768px) {
+  li {
+    margin: 5vh 0;
+  }
+
+  ul {
+    margin: 0 15vw;
+  } 
+}
 
 /* Laptop */
+@media screen and (min-width: 1366px) {
+  ul {
+    margin: 0 25vw;
+  }
+}
 
 /* Desktop */
+@media screen and (min-width: 1920px) {
+  
+}
 
 </style>

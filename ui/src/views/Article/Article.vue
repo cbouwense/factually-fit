@@ -116,7 +116,6 @@ export default {
 
 * {
   color: rgb(41, 41, 41);
-  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
   word-break: break-word;
   /* -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased; */

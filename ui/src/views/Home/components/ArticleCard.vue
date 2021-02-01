@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped>
-
+/* Mobile Vertical */
 * {
   color: white;
   justify-content: space-around;
@@ -26,12 +26,10 @@ export default {
 a {
   background-image: linear-gradient(to bottom right, orange, purple);
   border-radius: 5px;
-  box-shadow: 5px 5px 5px gray;
+  box-shadow: 2px 2px 4px 4px #ccc;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  margin: 30px 0;
-  min-height: 100px;
+  min-height: 15vh;
   padding: 10px;
   text-decoration: none;
 }
@@ -39,12 +37,39 @@ a {
 h1 {
   font-size: 22px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   word-wrap: break-word;
 }
 
 h2 {
   font-size: 18px;
+  font-weight: 400;
 }
+
+/* Mobile Horizontal */
+@media screen and (min-width: 640px) {
+  a {
+    min-height: 33vh;
+  }
+  
+  h1 {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+
+/* Tablet Vertical */
+@media screen and (min-width: 768px) {
+  
+}
+
+/* Tablet Horizontal */
+
+/* Laptop */
+
+/* Desktop */
 
 </style>
