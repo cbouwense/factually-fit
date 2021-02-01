@@ -10,8 +10,7 @@
           <h2>THE GIST</h2>
           <section>
             <p>
-              <span v-for="(n, i) in citedGist" :key="i"
-              >
+              <span v-for="(n, i) in citedGist" :key="i">
                 {{ n.text }}<sup>{{ n.ref }}</sup>
               </span>
             </p>
@@ -25,7 +24,7 @@
       <section v-for="(p, i) in citedBody" :key="i">
         <p>
           {{ p.text }}
-          <a :href="`citation-${p.ref}`">
+          <a :href="`#citation-${p.ref}`">
             <sup>{{ p.ref }}</sup>
           </a>
         </p>
@@ -136,12 +135,22 @@ export default {
   display: flex
 }
 
-.splash img {
-  object-fit: scale-down;
-}
-
 .splash .img-container { 
   width: 40%;
+  /* TODO: this should be a variable from the global styles or something */
+  right: -30px;
+  position: relative;
+}
+
+.splash img {
+  top: 50%;
+  position: absolute;
+  object-fit: none;
+  object-position: 0 0; /* positioned top left of the content box */
+  width: 100%;
+  height: 100%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 h1 { 
