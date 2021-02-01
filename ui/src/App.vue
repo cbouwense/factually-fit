@@ -1,5 +1,5 @@
 <template>
-  <div id="page">
+  <div>
     <a href="/"><img id="logo" src="https://i.imgur.com/daGy27V.png" /></a>
     <router-view/>
   </div>
@@ -12,12 +12,12 @@ export default {
 </script>
 
 <style>
-#page {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#app {
   color: #2c3e50;
-  padding: 30px;
+  height: 90vh;
+  padding: 5vh;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 #logo {

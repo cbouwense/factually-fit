@@ -2,13 +2,13 @@
   <div>
     <Loading :loading="store.state.loading" />
     <ul class="article-list">
-      <ArticleCard 
-        v-for="a in articles" 
-        :key=a.name
-        :id=a.id
-        :title=a.title
-        :subtitle=a.subtitle
-      />
+      <li v-for="a in articles" :key=a.name>
+        <ArticleCard  
+          :id=a.id
+          :title=a.title
+          :subtitle=a.subtitle
+        />
+      </li>
     </ul>
   </div>
 </template>
@@ -47,3 +47,19 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+/* Mobile */
+li {
+  height: 33%;
+  width: 33%;
+}
+
+/* Tablet */
+
+/* Laptop */
+
+/* Desktop */
+
+</style>
