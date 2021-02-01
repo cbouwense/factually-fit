@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import store from "../store";
+import store from "../../../store";
 import ArticleCard from './ArticleCard.vue';
-import Loading from './Loading.vue';
+import Loading from '../../../components/Loading';
 
 export default {
   name: "ArticleList",

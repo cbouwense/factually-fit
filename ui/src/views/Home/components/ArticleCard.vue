@@ -24,27 +24,27 @@ export default {
 }
 
 a {
-  min-height: 100px;
-  height: 100%;
+  background-image: linear-gradient(to bottom right, orange, purple);
   border-radius: 5px;
   box-shadow: 5px 5px 5px gray;
-  margin: 30px 0;
-  padding: 10px;
-  background-image: linear-gradient(to bottom right, orange, purple);
   display: flex;
   flex-direction: column;
+  height: 100%;
+  margin: 30px 0;
+  min-height: 100px;
+  padding: 10px;
   text-decoration: none;
 }
 
 h1 {
-  font-size: 50px;
-  font-weight: 900;
-  margin-bottom: 25px;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
   word-wrap: break-word;
 }
 
 h2 {
-  font-size: 35px;
+  font-size: 18px;
 }
 
 </style>
