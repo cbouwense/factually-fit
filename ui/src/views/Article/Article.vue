@@ -23,17 +23,9 @@
       <section>
         <h2>THE LONG VERSION</h2>
         <div v-for="(t, i) in bodyTokens" :key="i">
-          <p>
-            <Dots v-if="t.dots" />
-            <span v-if="t.text">{{ t.text }}</span>
-          </p>
+          <p v-if="t.text">{{ t.text }}</p>
+          <Dots v-if="t.dots" />
 
-
-
-
-          <!-- <p v-if="t.paragraphStart">
-
-          </p v-if="t.paragraphEnd"> -->
 
           <!-- 
           <p>
