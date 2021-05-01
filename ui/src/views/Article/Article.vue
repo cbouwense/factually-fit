@@ -15,21 +15,33 @@
       <section>
         <h2>THE GIST</h2>
         <p>
-          <span v-for="(n, i) in citedGist" :key="i">
+          <span v-for="(n, i) in gistTokens" :key="i">
             {{ n.text }}<sup>{{ n.ref }}</sup>
           </span>
         </p>
       </section>
       <section>
         <h2>THE LONG VERSION</h2>
-        <div v-for="(p, i) in citedBody" :key="i">
+        <div v-for="(t, i) in bodyTokens" :key="i">
           <p>
-            {{ p.text }}
-            <a :href="`#citation-${p.ref}`">
-              <sup>{{ p.ref }}</sup>
-            </a>
+            <Dots v-if="t.dots" />
+            <span v-if="t.text">{{ t.text }}</span>
           </p>
-          <Dots v-if="i < citedBody.length-1" />
+
+
+
+
+          <!-- <p v-if="t.paragraphStart">
+
+          </p v-if="t.paragraphEnd"> -->
+
+          <!-- 
+          <p>
+            {{ t.text }}
+            <a :href="`#citation-${t.ref}`">
+              <sup>{{ t.ref }}</sup>
+            </a>
+          </p> -->
         </div>
       </section>
       <section>
@@ -49,51 +61,18 @@ import Citations from "./components/Citations";
 import Dots from "./components/Dots";
 import Loading from "../../components/Loading";
 
-const addCitationNums = (text, citations) => {
-  let citedTextTokens = [];
-  if (citations && text) {
-    let startIdx = 0;
-    let endIdx = 1;
-    
-    while (endIdx < text.length) {
-      // Extract the text before a reference.
-      while (text.charAt(endIdx) !== "{" && endIdx < text.length) {
-        endIdx++;
-      }
-      if (endIdx >= text.length) {
-        break;
-      }
-      const textToken = text.substring(startIdx, endIdx);
-      console.log("textToken: ", textToken)
+const parseText = text => text.split("\n");
 
-      // Extract the reference from the curly braces.
-      startIdx = endIdx + 1;
-      endIdx = startIdx + 1;
-      
-      while (text.charAt(endIdx) !== "}") {
-        endIdx++;
-      }
-      const refToken = text.substring(startIdx, endIdx);
-
-      startIdx = endIdx + 1;
-      endIdx = startIdx + 1;
-
-      citedTextTokens.push({
-        ref: refToken,
-        text: textToken
-      }); 
+const textOrDots = tokens => {
+  const textOrDotsTokens = [];
+  tokens.forEach(t => {
+    if (t === "\\d") {
+      textOrDotsTokens.push({ dots: true });
+    } else if (t !== "") {
+      textOrDotsTokens.push({ text: t });
     }
-
-    if (startIdx < text.length) {
-      citedTextTokens.push({
-        ref: undefined,
-        text: text.substring(startIdx)  
-      });
-    }
-
-    console.log("citedTextTokens: ", citedTextTokens);
-  }
-  return citedTextTokens;
+  });
+  return textOrDotsTokens;
 }
 
 export default {
@@ -128,11 +107,22 @@ export default {
     }
   },
   computed: {
-    citedBody: function() {
-      return addCitationNums(this.article.body, this.article.citations);
+    bodyTokens: function() {
+      // Break up text by paragraph.
+      const bodyTokens = parseText(this.article.body);
+      console.log("bodyTokens: ", bodyTokens);
+
+      // Delineate by text or dots.
+      const textAndDotsTokens = textOrDots(bodyTokens);
+      console.log("textAndDotsTokens: ", textAndDotsTokens);
+
+      return textAndDotsTokens;
+      // // Add citations to 
+      // const citedBodyTokens = addCitationNums(this.article.body, this.article.citations);
     },
-    citedGist: function() {
-      return addCitationNums(this.article.gist, this.article.citations);
+    gistTokens: function() {
+      return undefined;
+      //return addCitationNums(this.article.gist, this.article.citations);
     }
   }
 }
