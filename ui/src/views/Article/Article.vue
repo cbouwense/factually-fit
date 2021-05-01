@@ -22,7 +22,10 @@
       </section>
       <section>
         <h2>THE LONG VERSION</h2>
-        <div v-for="(t, i) in bodyTokens" :key="i">
+        <div 
+          v-for="(t, i) in bodyTokens" :key="i"
+          class="cited" 
+        >
           <p v-if="t.text">{{ t.text }}</p>
           <Dots v-if="t.dots" />
 
@@ -115,6 +118,36 @@ export default {
     gistTokens: function() {
       return undefined;
       //return addCitationNums(this.article.gist, this.article.citations);
+    }
+  },
+  updated() {
+    if (!this.store.state.loading /* TODO: only do this once */) {
+      const elementsInCitedSections = Array.from(document.getElementsByClassName("cited"));
+      console.log("elementsInCitedSections: ", elementsInCitedSections)
+      const elementsWithCitations = elementsInCitedSections.filter(e => e.children[0].tagName === "P").map(e => e.children[0]);
+      console.log("elementsWithCitations: ", elementsWithCitations);
+      elementsWithCitations.forEach(e => {
+        let finalInnerHTML = "";
+        let start = 0;
+        let end = 1;
+        while (end < e.innerHTML.length) {
+          if (e.innerHTML.charAt(end) === "{") {
+            finalInnerHTML += e.innerHTML.substring(start, end);
+            start = end + 1;
+            while (e.innerHTML.charAt(end) !== "}") {
+              end++;
+            }
+            const citationNum = e.innerHTML.substring(start, end);
+            start = end + 1;
+            finalInnerHTML += `<sup style="vertical-align: super; font-size: 16px;">${citationNum}</sup>`;
+          }
+          end++;
+        }
+        if (finalInnerHTML.length > 0) {
+          finalInnerHTML += e.innerHTML.substring(start, end);
+          e.innerHTML = finalInnerHTML;
+        }
+      });
     }
   }
 }
