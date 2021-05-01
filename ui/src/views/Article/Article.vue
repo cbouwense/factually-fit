@@ -5,7 +5,7 @@
       <section>
         <h1 class="heading-element">{{ article.title }}</h1>
         <h3 class="heading-element">{{ article.subtitle }}</h3>
-        <p class="date heading-element">Posted on {{ article.date }}</p>
+        <p class="date heading-element">Posted on {{ article.date }} | Last edited on {{ article.last_edited }}</p>
       </section>
       <section class="splash">
         <div class="img-container">
@@ -50,21 +50,50 @@ import Dots from "./components/Dots";
 import Loading from "../../components/Loading";
 
 const addCitationNums = (text, citations) => {
-  let tags = [];
+  let citedTextTokens = [];
   if (citations && text) {
-    citations.forEach(c => {
-      const tokens = text.split(`{${c.ref}}`);
-        tags.push({
-          text: tokens[0],
-          /* eslint-disable no-extra-boolean-cast */
-          ref: !!tokens[0] ? c.ref : `, ${c.ref}`
-        });
-        if (tokens[1]) {
-          text = tokens[1];
-        }
-    });
+    let startIdx = 0;
+    let endIdx = 1;
+    
+    while (endIdx < text.length) {
+      // Extract the text before a reference.
+      while (text.charAt(endIdx) !== "{" && endIdx < text.length) {
+        endIdx++;
+      }
+      if (endIdx >= text.length) {
+        break;
+      }
+      const textToken = text.substring(startIdx, endIdx);
+      console.log("textToken: ", textToken)
+
+      // Extract the reference from the curly braces.
+      startIdx = endIdx + 1;
+      endIdx = startIdx + 1;
+      
+      while (text.charAt(endIdx) !== "}") {
+        endIdx++;
+      }
+      const refToken = text.substring(startIdx, endIdx);
+
+      startIdx = endIdx + 1;
+      endIdx = startIdx + 1;
+
+      citedTextTokens.push({
+        ref: refToken,
+        text: textToken
+      }); 
+    }
+
+    if (startIdx < text.length) {
+      citedTextTokens.push({
+        ref: undefined,
+        text: text.substring(startIdx)  
+      });
+    }
+
+    console.log("citedTextTokens: ", citedTextTokens);
   }
-  return tags;
+  return citedTextTokens;
 }
 
 export default {
@@ -84,7 +113,6 @@ export default {
     try {
       this.store.setLoading(true);
       const res = (await (await fetch(`http://localhost:3001/${useRoute().params.articleId}`)).json()).article;
-      this.store.setLoading(false);
       this.article = {
         body: res.body,
         citations: res.citations,
@@ -94,6 +122,7 @@ export default {
         subtitle: res.metadata.subtitle,
         title: res.metadata.title
       }
+      this.store.setLoading(false);
     } catch (err) {
       console.error(err);
     }
