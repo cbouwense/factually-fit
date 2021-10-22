@@ -3,8 +3,15 @@
 A place for me to write articles on health and fitness topics that I find intersting.
 
 ## Tech Stack
-- Vue
+Frontend:
+- React
+  - React Context API 
+- Typescript
+
+Backend:
 - node
   - Express
+
+Data:
 - GCP
   - Storage
