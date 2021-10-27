@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>Factually Fit</h1>
+<!-- Search -->
+<!-- Article List -->
+
+<style>
+  h1 {
+    font-size: 100px;
+    margin: 100px auto 0 auto;
+    text-align: center;
+  }
+</style>
