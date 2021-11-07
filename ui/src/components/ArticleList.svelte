@@ -7,7 +7,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch('http://localhost:3001/');
+      const res = await fetch('http://localhost:3001/'); // TODO: extract this to an interface or something.
       articles = await res.json();
     } catch (e) {
       console.error(e);
@@ -21,7 +21,7 @@
 
 {#if isLoaded}
   {#each articles as a}
-    <ArticleCard imgUrl={a.data.imgUrl} id={a.id} />
+    <ArticleCard imgUrl={a.metadata.imgUrl} id={a.id} />
   {/each}
 {:else}
   <!-- Might be cool to have a loading card -->
