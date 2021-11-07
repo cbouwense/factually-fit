@@ -44,7 +44,7 @@ app.get("/", async (_, res) => {
       })
       .map(async (a) => ({
         id: a.metadata.name.split("/")[0],
-        data: JSON.parse((await bucket.file(a.metadata.name).download()).toString())
+        metadata: JSON.parse((await bucket.file(a.metadata.name).download()).toString())
       }))
     );
     return res.status(200).json(metadataForAllArticles);
