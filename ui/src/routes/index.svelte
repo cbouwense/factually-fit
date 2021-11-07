@@ -1,5 +1,5 @@
 <script>
-  import ArticleCard from "../components/ArticleCard.svelte";
+  import ArticleList from "../components/ArticleList.svelte";
   import Search from "../components/Search.svelte";
 </script>
 
@@ -8,10 +8,7 @@
     <div class="column is-half">
       <h1 class="title is-1 has-text-centered my-6">Factually Fit</h1>
       <Search />
-      <!-- Maybe make an ArticleList component-->
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
+      <ArticleList />
     </div>
   </div>
 </div>

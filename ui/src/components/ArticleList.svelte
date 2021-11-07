@@ -1,0 +1,31 @@
+<script>
+  import { onMount } from "svelte";
+  import ArticleCard from "./ArticleCard.svelte";
+
+  let articles = []; // TODO: type this
+  let isLoaded = false;
+
+  onMount(async () => {
+    try {
+      const res = await fetch('http://localhost:3001/');
+      articles = await res.json();
+    } catch (e) {
+      console.error(e);
+    }
+    isLoaded = true;
+    console.log("articles: ", articles);
+    console.log("first id: ", articles[0].id)
+  });
+</script>
+
+
+{#if isLoaded}
+  {#each articles as a}
+    <ArticleCard imgUrl={a.data.imgUrl} id={a.id} />
+  {/each}
+{:else}
+  <!-- Might be cool to have a loading card -->
+  <ArticleCard />
+  <ArticleCard />
+  <ArticleCard />
+{/if}

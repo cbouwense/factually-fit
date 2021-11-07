@@ -1,10 +1,19 @@
+<script>
+  export let id = "";
+  export let imgUrl = "https://bulma.io/images/placeholders/1280x960.png";
+</script>
+
+<!--
+  Maybe take all of these divs into a container component or something, 
+  this is just so ugly.
+-->
 <div class="box block">
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <a href="https://www.poop.bike/">
+        <a href={id}>
           <!-- svelte-ignore a11y-img-redundant-alt -->
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          <img src={imgUrl} alt="Placeholder image">
         </a>
       </figure>
     </div>
