@@ -1,19 +1,38 @@
-<script>
+<script lang="ts">
   import { getStores /*, page */ } from '$app/stores';
   import { onMount } from "svelte";
 
-  let article = {}; // TODO: type this
+  type Article = {
+    body: string,
+    citations: Citation[],
+    gist: string,
+    metadata: {
+      id: string,
+      date: string,
+      imgUrl: string,
+      subtitle: string,
+      tags: string[],
+      title: string,
+    }
+  };
+
+  type Citation = {
+    author: string,
+    link: string,
+    publication: string,
+    ref: number,
+    title: string,
+  };
+
+  let article: Article | undefined;
   let error;
   let isLoaded = false;
   const { page } = getStores();
 
   onMount(async () => {
     try {
-      console.log("page: ", page);
-      console.log("$page: ", $page);
       const res = await fetch(`http://localhost:3001${$page.path}`); // TODO: extract this to an interface or something.
       article = await res.json();
-      console.log("article: ", article);
     } catch (e) {
       console.error(e);
       error = e;
@@ -36,6 +55,14 @@
     <p>{article.gist}</p>
     <h2 class="title is-2">The Long Version</h2>
     <p>{article.body}</p>
+    <h2 class="title is-2">Citations</h2>
+    <ol>
+      {#each article.citations as citation}
+        <li>
+          <span><a href={citation.link}>{citation.title}</a>, {citation.author}</span>
+        </li>
+      {/each}
+    </ol>
   </div>
 {/if}
 
