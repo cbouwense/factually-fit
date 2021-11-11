@@ -57,7 +57,7 @@ app.get("/", async (_, res) => {
 app.get("/:name", async (req, res) => {
   try {
     const article = await getArticleByName(req.params.name);
-    return res.status(200).json({ article });
+    return res.status(200).json({ ...article });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: err });
