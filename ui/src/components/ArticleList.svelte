@@ -13,8 +13,6 @@
       console.error(e);
     }
     isLoaded = true;
-    console.log("articles: ", articles);
-    console.log("first id: ", articles[0].id)
   });
 </script>
 
