@@ -10,7 +10,7 @@ const bucket = storage.bucket("factually-fit-articles");
 
 async function getArticleByName(name) {
   try {
-    console.log("before toString(): " (await bucket.file(`${name}/body.txt`).download()));
+    // console.log("before toString(): " (await bucket.file(`${name}/body.txt`).download()));
     const body = (await bucket.file(`${name}/body.txt`).download()).toString();
     const gist = (await bucket.file(`${name}/gist.txt`).download()).toString();
     const metadata = JSON.parse((await bucket.file(`${name}/metadata.json`).download()).toString());
