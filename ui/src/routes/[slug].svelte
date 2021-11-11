@@ -2,7 +2,7 @@
   import { getStores } from '$app/stores';
   import { onMount } from "svelte";
 
-  import Search from "../components/Search.svelte";
+  import Navbar from "../components/Navbar.svelte";
 
   type Article = {
     body: string,
@@ -43,17 +43,7 @@
   });
 </script>
 
-<div class="columns">
-  <div class="column">
-    <div class="box">
-      F
-    </div>
-  </div>
-  <div class="column is-11">
-    <Search />
-  </div>
-</div>
-
+<Navbar />
 {#if !isLoaded}
   <p>loading...</p>
 {:else if Boolean(error)}
