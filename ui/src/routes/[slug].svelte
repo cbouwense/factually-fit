@@ -49,24 +49,25 @@
 {:else if Boolean(error)}
   <p>error {error}</p>
 {:else}
-
-  <h1 class="title">{article.metadata.title}</h1>
-  <!-- TODO: make this into another component maybe -->
-  <h3 class="subtitle">{article.metadata.date} - 5 minute read</h3> <!-- TODO: calculate reading duration -->
-  <img src={article.metadata.imgUrl} alt="Placeholder alt" />
-  <div class="content">
-    <h2 class="title is-2">The Gist</h2>
-    <p>{article.gist}</p>
-    <h2 class="title is-2">The Long Version</h2>
-    <p>{article.body}</p>
-    <h2 class="title is-2">Citations</h2>
-    <ol>
-      {#each article.citations as citation}
-        <li>
-          <span><a href={citation.link}>{citation.title}</a>, {citation.author}</span>
-        </li>
-      {/each}
-    </ol>
+  <div class="container">
+    <div class="content is-medium">
+      <h1>{article.metadata.title}</h1>
+      <!-- TODO: make this into another component maybe -->
+      <p>{article.metadata.date} - 5 minute read</p> <!-- TODO: calculate reading duration -->
+      <img src={article.metadata.imgUrl} alt="Placeholder alt" />
+      <h2 class="title is-2">The Gist</h2>
+      <p>{article.gist}</p>
+      <h2 class="title is-2">The Long Version</h2>
+      <p>{article.body}</p>
+      <h2 class="title is-2">Citations</h2>
+      <ol>
+        {#each article.citations as citation}
+          <li>
+            <span><a href={citation.link}>{citation.title}</a>, {citation.author}</span>
+          </li>
+        {/each}
+      </ol>
+    </div>
   </div>
 {/if}
 
