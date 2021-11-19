@@ -2,16 +2,19 @@
   import Search from "./Search.svelte";
 </script>
 
-<nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+<nav class="navbar has-shadow is-light">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/F.png" width="128" height="128" alt="Factually Fit small logo">
-    </a>
+    <img src="/F.png" alt="Factually Fit Placeholder Logo" />
   </div>
-
-  <div id="navbar-search">
-    <!-- <div class="navbar-start"?> -->
-      <Search />
-    <!-- </div> -->
+  <div class="navbar-menu" id="menu">
+    <div class="navbar-start" id="end">
+      <div class="navbar-item">
+        <Search />
+      </div>
+    </div>
   </div>
 </nav>
+
+<style>
+  @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+</style>
