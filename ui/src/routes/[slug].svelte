@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getStores } from '$app/stores';
   import { onMount } from "svelte";
+  import articles from "../articles/index";
 
   import Navbar from "../components/Navbar.svelte";
 
@@ -58,7 +59,7 @@
       <h2 class="title is-2">The Gist</h2>
       <p>{article.gist}</p>
       <h2 class="title is-2">The Long Version</h2>
-      <p>{article.body}</p>
+      <svelte:component this={articles[article.metadata.id]} />
       <h2 class="title is-2">Citations</h2>
       <ol>
         {#each article.citations as citation}

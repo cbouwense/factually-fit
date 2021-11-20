@@ -4,7 +4,7 @@
 
 <nav class="navbar has-shadow is-light">
   <div class="navbar-brand">
-    <img src="/F.png" alt="Factually Fit Placeholder Logo" />
+    <a href="/" target="_self"><img src="/F.png" alt="Factually Fit Placeholder Logo" /></a>
   </div>
   <div class="navbar-menu" id="menu">
     <div class="navbar-start" id="end">
@@ -17,4 +17,10 @@
 
 <style>
   @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+  a {color: white;}         /* Unvisited link  */
+  a:visited {color: white;} /* Visited link    */
+  a:hover {color: white;}   /* Mouse over link */
+  a:active {color: white;}  /* Selected link   */
+
 </style>
