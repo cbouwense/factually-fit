@@ -1,5 +1,9 @@
-import GlycogenAndWaterWeight from "./GlycogenAndWaterWeight.svelte";
+import GlycogenAndWaterWeight from "./GlycogenAndWaterWeight";
 
-export default { // Mapping of article IDs to article components
-  "glycogen-and-water-weight": GlycogenAndWaterWeight,
+// TODO: is there a programmatic way of doing this?
+export default {
+  "glycogen-and-water-weight": {
+    gist: GlycogenAndWaterWeight.gist,
+    long: GlycogenAndWaterWeight.long,
+  }
 };

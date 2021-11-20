@@ -16,7 +16,6 @@
   });
 </script>
 
-
 {#if isLoaded}
   {#each articles as a}
     <ArticleCard imgUrl={a.metadata.imgUrl} id={a.id} />
