@@ -36,6 +36,7 @@
     try {
       const res = await fetch(`http://localhost:3001${$page.path}`); // TODO: extract this to an interface or something.
       article = await res.json();
+      document.title = article.metadata.title;
     } catch (e) {
       console.error(e);
       error = e;

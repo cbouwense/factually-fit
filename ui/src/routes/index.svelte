@@ -1,6 +1,8 @@
 <script>
   import ArticleList from "../components/ArticleList.svelte";
   import Search from "../components/Search.svelte";
+
+  document.title = "Factually Fit";
 </script>
 
 <div class="container">
