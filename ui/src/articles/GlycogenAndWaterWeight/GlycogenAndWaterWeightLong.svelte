@@ -3,7 +3,6 @@
   import Dots from "../../components/Dots.svelte";
 </script>
 
-
 <p>If you are interested in weight loss you will eventually run into the term "water weight." This phrase has always seemed kind of nebulous to me, and maybe even a fantasy. However, the scientific literature has an explanation of this phenomenon, why it occurs, and what it means for weight loss and gain.</p>
 <p>When you step on a scale, the number you see is a composite of many different things: fat, lean muscle mass, organs, waste, bone, and a whole host of other components. One of these components is the weight due to the water that is stored in your body, or "water weight."<C ref=4 /> Consider the scenario of weighing yourself before and immediately after drinking a glass of water. 16 fluid ounces of water weighs one pound. In this scenario, if you weigh 200 pounds before you drink the glass of water, you will weigh 201 pounds after drinking the glass. An obvious conclusion, but it is an important concept: water inside of you contributes to the number on the scale!</p>
 <Dots />
