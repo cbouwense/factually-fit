@@ -50,24 +50,26 @@
 {:else if Boolean(error)}
   <p>error {error}</p>
 {:else}
-  <div class="container">
-    <div class="content is-medium">
-      <h1>{article.metadata.title}</h1>
-      <!-- TODO: make this into another component maybe -->
-      <p>{article.metadata.date} - 5 minute read</p> <!-- TODO: calculate reading duration -->
-      <img src={article.metadata.imgUrl} alt="Placeholder alt" />
-      <h2 class="title is-2">The Gist</h2>
-      <svelte:component this={articles[article.metadata.id].gist} />
-      <h2 class="title is-2">The Long Version</h2>
-      <svelte:component this={articles[article.metadata.id].long} />
-      <h2 class="title is-2">Citations</h2>
-      <ol>
-        {#each article.citations as citation}
-          <li>
-            <span><a href={citation.link}>{citation.title}</a>, {citation.author}</span>
-          </li>
-        {/each}
-      </ol>
+  <div class="section">
+    <div class="container">
+      <div class="content is-medium">
+        <h1>{article.metadata.title}</h1>
+        <!-- TODO: make this into another component maybe -->
+        <p>{article.metadata.date} - 5 minute read</p> <!-- TODO: calculate reading duration -->
+        <img src={article.metadata.imgUrl} alt="Placeholder alt" />
+        <h2 class="title is-2">The Gist</h2>
+        <svelte:component this={articles[article.metadata.id].gist} />
+        <h2 class="title is-2">The Long Version</h2>
+        <svelte:component this={articles[article.metadata.id].long} />
+        <h2 class="title is-2">Citations</h2>
+        <ol>
+          {#each article.citations as citation}
+            <li>
+              <span><a href={citation.link}>{citation.title}</a>, {citation.author}</span>
+            </li>
+          {/each}
+        </ol>
+      </div>
     </div>
   </div>
 {/if}
