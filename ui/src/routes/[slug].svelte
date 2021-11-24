@@ -65,7 +65,7 @@
         <ol>
           {#each article.citations as citation}
             <li>
-              <span><a href={citation.link}>{citation.title}</a>, {citation.author}</span>
+              <span id={`${citation.ref}`}><a href={citation.link}>{citation.title}</a>, {citation.author}</span>
             </li>
           {/each}
         </ol>
