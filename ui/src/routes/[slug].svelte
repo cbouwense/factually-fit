@@ -3,8 +3,10 @@
   import { onMount } from "svelte";
   import articles from "../articles/index";
 
+  import Error404 from "./Error404.svelte";
   import Navbar from "../components/Navbar.svelte";
 
+  // TODO: separate these from this file.
   type Article = {
     body: string,
     citations: Citation[],
@@ -35,10 +37,11 @@
   onMount(async () => {
     try {
       const res = await fetch(`http://localhost:3001${$page.path}`); // TODO: extract this to an interface or something.
+      if (!res.ok) throw { status: res.status, statusText: res.statusText };
       article = await res.json();
       document.title = article.metadata.title;
     } catch (e) {
-      console.error(e);
+      console.log(e);
       error = e;
     }
     isLoaded = true;
@@ -49,7 +52,9 @@
 {#if !isLoaded}
   <p>loading...</p>
 {:else if Boolean(error)}
-  <p>error {error}</p>
+  {#if error.status === 404}
+    <Error404 />
+  {/if}
 {:else}
   <div class="section">
     <div class="container">
