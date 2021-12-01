@@ -4,6 +4,7 @@
   import articles from "../articles/index";
 
   import Error404 from "./Error404.svelte";
+  import Error500 from "./Error500.svelte";
   import Navbar from "../components/Navbar.svelte";
 
   // TODO: separate these from this file.
@@ -54,6 +55,8 @@
 {:else if Boolean(error)}
   {#if error.status === 404}
     <Error404 />
+  {:else if error.status === 500}
+    <Error500 error={error} />
   {/if}
 {:else}
   <div class="section">
