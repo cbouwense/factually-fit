@@ -10,14 +10,14 @@ const bucket = storage.bucket("factually-fit-articles");
 
 async function getArticleByName(name) {
   try {
-    // console.log("before toString(): " (await bucket.file(`${name}/body.txt`).download()));
     const body = (await bucket.file(`${name}/body.txt`).download()).toString();
     const gist = (await bucket.file(`${name}/gist.txt`).download()).toString();
     const metadata = JSON.parse((await bucket.file(`${name}/metadata.json`).download()).toString());
     const citations = JSON.parse((await bucket.file(`${name}/citations.json`).download()).toString());
     return { body, gist, metadata, citations };
   } catch (err) {
-    console.error(err);
+    console.error("get article by name issue: ", err);
+    throw err;
   } 
 }
 
@@ -60,7 +60,7 @@ app.get("/:name", async (req, res) => {
     return res.status(200).json({ ...article });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: err });
+    return res.status(err.code).json({ message: err });
   }
 });
 
