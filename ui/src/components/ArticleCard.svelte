@@ -1,6 +1,9 @@
 <script>
+  import Loading from "../components/Loading.svelte";
+
   export let id = "";
   export let imgUrl = "https://bulma.io/images/placeholders/1280x960.png";
+  export let isLoading = false;
 </script>
 
 <!--
@@ -8,17 +11,23 @@
   this is just so ugly.
 -->
 <div class="box block">
-  <div class="card">
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <a href={id}>
-          <!-- svelte-ignore a11y-img-redundant-alt -->
-          <img src={imgUrl} alt="Placeholder image">
-        </a>
-      </figure>
+  {#if isLoading}
+    <div class="loading-container">
+      <Loading />
     </div>
-  </div>
-</div>   
+  {:else}
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-4by3">
+          <a href={id}>
+            <!-- svelte-ignore a11y-img-redundant-alt -->
+            <img src={imgUrl} alt="Placeholder image">
+          </a>
+        </figure>
+      </div>
+    </div>
+  {/if}
+</div>
 
 <style>
   @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
@@ -29,5 +38,10 @@
 
   .box:hover {
     transform: scale(1.1);
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
   }
 </style>

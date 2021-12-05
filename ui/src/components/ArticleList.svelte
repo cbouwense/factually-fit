@@ -21,8 +21,13 @@
     <ArticleCard imgUrl={a.metadata.imgUrl} id={a.id} />
   {/each}
 {:else}
-  <!-- Might be cool to have a loading card -->
-  <ArticleCard />
-  <ArticleCard />
-  <ArticleCard />
+  <ArticleCard isLoading={true} />
+  <ArticleCard isLoading={true} />
+  <ArticleCard isLoading={true} />
+  <ArticleCard isLoading={true} />
+  <ArticleCard isLoading={true} />
 {/if}
+
+<style>
+  @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+</style>
