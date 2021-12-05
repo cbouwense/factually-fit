@@ -10,11 +10,13 @@ const bucket = storage.bucket("factually-fit-articles");
 
 async function getArticleByName(name) {
   try {
-    const body = (await bucket.file(`${name}/body.txt`).download()).toString();
-    const gist = (await bucket.file(`${name}/gist.txt`).download()).toString();
+    // TODO: I don't think I actually need body or gist.
+    // const body = (await bucket.file(`${name}/body.txt`).download()).toString();
+    // const gist = (await bucket.file(`${name}/gist.txt`).download()).toString();
     const metadata = JSON.parse((await bucket.file(`${name}/metadata.json`).download()).toString());
     const citations = JSON.parse((await bucket.file(`${name}/citations.json`).download()).toString());
-    return { body, gist, metadata, citations };
+
+    return { metadata, citations };
   } catch (err) {
     console.error("get article by name issue: ", err);
     throw err;

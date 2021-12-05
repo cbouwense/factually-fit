@@ -2,6 +2,7 @@
   "id": "unique-article-id",
   "date": "Month Day, Year",
   "imgUrl": "Splash image url",
+  "readingTime": 5,
   "subtitle": "Catchy subtitle for why you should read the article",
   "tags": ["words", "to", "fuzzy", "search"],
   "title": "Short catchy title"

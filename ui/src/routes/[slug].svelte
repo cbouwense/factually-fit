@@ -16,6 +16,7 @@
       id: string,
       date: string,
       imgUrl: string,
+      readingTime: number,
       subtitle: string,
       tags: string[],
       title: string,
@@ -64,7 +65,7 @@
       <div class="content is-medium">
         <h1>{article.metadata.title}</h1>
         <!-- TODO: make this into another component maybe -->
-        <p>{article.metadata.date} - 5 minute read</p> <!-- TODO: calculate reading duration -->
+        <p>{article.metadata.date} - {article.metadata.readingTime} minute read</p>
         <img src={article.metadata.imgUrl} alt="Placeholder alt" />
         <h2 class="title is-2">The Gist</h2>
         <svelte:component this={articles[article.metadata.id].gist} />
