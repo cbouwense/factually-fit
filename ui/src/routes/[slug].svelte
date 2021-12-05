@@ -6,6 +6,7 @@
   import Error404 from "./Error404.svelte";
   import Error500 from "./Error500.svelte";
   import Navbar from "../components/Navbar.svelte";
+  import QuickInfo from "../components/QuickInfo.svelte";
 
   // TODO: separate these from this file.
   type Article = {
@@ -65,9 +66,10 @@
       <div class="content is-medium">
         <h1>{article.metadata.title}</h1>
         <!-- TODO: make this into another component maybe -->
-        <p>{article.metadata.date} - {article.metadata.readingTime} minute read</p>
+        <QuickInfo date={article.metadata.date} readingTime={article.metadata.readingTime} /> 
         <img src={article.metadata.imgUrl} alt="Placeholder alt" />
         <h2 class="title is-2">The Gist</h2>
+        <!-- TODO: I wonder if there's a way to lazy load these. -->
         <svelte:component this={articles[article.metadata.id].gist} />
         <h2 class="title is-2">The Long Version</h2>
         <svelte:component this={articles[article.metadata.id].long} />
