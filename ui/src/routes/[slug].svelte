@@ -5,6 +5,7 @@
 
   import Error404 from "./Error404.svelte";
   import Error500 from "./Error500.svelte";
+  import Loading from "../components/Loading.svelte";
   import Navbar from "../components/Navbar.svelte";
   import QuickInfo from "../components/QuickInfo.svelte";
 
@@ -44,7 +45,6 @@
       article = await res.json();
       document.title = article.metadata.title;
     } catch (e) {
-      console.log(e);
       error = e;
     }
     isLoaded = true;
@@ -53,7 +53,15 @@
 
 <Navbar />
 {#if !isLoaded}
-  <p>loading...</p>
+  <!-- TODO: It'd be cool if I did a TTYD style curtain drop -->
+  <div class="modal is-active">
+    <div class="modal-content">
+      <div>
+        <Loading />
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
 {:else if Boolean(error)}
   {#if error.status === 404}
     <Error404 />
@@ -88,4 +96,9 @@
 
 <style>
   @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+  .modal-content div {
+    display: flex;
+    justify-content: center;
+  }
 </style>
