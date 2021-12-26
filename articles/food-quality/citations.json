@@ -1,20 +1,38 @@
 [
   {
     "ref": 1,
-    "link": "https://example.com",
-    "title": "Carbs are a Macronutrient Paper",
-    "author": "Hugh Mungus"
+    "link": "https://pubmed.ncbi.nlm.nih.gov/18025815/",
+    "title": "Fat loss depends on energy deficit only, independently of the method for weight loss.",
+    "author": "Strasser, B et al."
   },
   {
     "ref": 2,
-    "link": "https://example.com",
-    "title": "Carbs are a Macronutrient Paper",
-    "author": "Hugh Mungus"
-  },
-  {
-    "ref": 3,
     "link": "https://www.nytimes.com/2018/02/20/well/eat/counting-calories-weight-loss-diet-dieting-low-carb-low-fat.html",
     "title": "The Key to Weight Loss Is Diet Quality, Not Quantity, a New Study Finds",
     "author": "Anahad O’Connor"
+  },
+  {
+    "ref": 3,
+    "link": "https://jamanetwork.com/journals/jama/fullarticle/2673150",
+    "title": "Effect of Low-Fat vs Low-Carbohydrate Diet on 12-Month Weight Loss in Overweight Adults and the Association With Genotype Pattern or Insulin Secretion",
+    "author": "Gardner CD, Trepanowski JF, Del Gobbo LC, et al."
+  },
+  {
+    "ref": 4,
+    "link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5639963/",
+    "title": "Reducing Calorie Intake May Not Help You Lose Body Weight.",
+    "author": "Benton D, Young HA."
+  },
+  {
+    "ref": 5,
+    "link": "https://journals.physiology.org/doi/full/10.1152/ajpendo.00156.2017",
+    "title": "\"Calories in, calories out\" and macronutrient intake: the hope, hype, and science of calories",
+    "author": "Scott Howell, Richard Kones"
+  },
+  {
+    "ref": 6,
+    "link": "https://onlinelibrary.wiley.com/doi/full/10.1038/oby.2001.133",
+    "title": "Low-Calorie Diets and Sustained Weight Loss",
+    "author": "Dr. Nicholas Finer"
   }
 ]
