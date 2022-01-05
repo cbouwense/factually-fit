@@ -4,8 +4,7 @@ A place for me to write articles on health and fitness topics that I find inters
 
 ## Tech Stack
 Frontend:
-- React
-  - React Context API 
+- Svelte
 - Typescript
 
 Backend:
