@@ -95,8 +95,6 @@
 {/if}
 
 <style>
-  @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
-
   .modal-content div {
     display: flex;
     justify-content: center;
