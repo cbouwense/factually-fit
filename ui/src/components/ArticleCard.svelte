@@ -30,8 +30,6 @@
 </div>
 
 <style>
-  @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
-
   .box {
     transition: all .3s cubic-bezier(.68,-0.55,.27,1.55);
   }

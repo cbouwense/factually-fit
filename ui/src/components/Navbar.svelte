@@ -16,8 +16,6 @@
 </nav>
 
 <style>
-  @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
-
   a {color: white;}         /* Unvisited link  */
   a:visited {color: white;} /* Visited link    */
   a:hover {color: white;}   /* Mouse over link */
