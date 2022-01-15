@@ -1,4 +1,4 @@
-<p>I did keto. No calorie counting, starving myself, or cardio.</p>
+<p>I did keto. No calorie counting, no starving myself, and definitely no cardio.</p>
 
 <style>
   p {
